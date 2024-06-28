@@ -17,9 +17,12 @@ public class PlayerController : MonoBehaviour
 
     [Header("Possesion")]
     public GameObject nearestPossessable;
-    [SerializeField] bool isPossessing = false;
+    [SerializeField] Color possessedColor;
+    [SerializeField] float maxDist = 7.0f;
+    [SerializeField] public bool isPossessing = false;
     [SerializeField] GameObject possessedObject;
-    Rigidbody2D objectRbComponent;
+
+    Rigidbody2D objectRbComponent;    
     
 
     // Start is called before the first frame update
@@ -41,10 +44,10 @@ public class PlayerController : MonoBehaviour
         playerRbComponent.AddForce(moveInput * accelerationSpeed);
 
         if(moveInput.magnitude <= 0) {
-            playerRbComponent.AddForce((playerRbComponent.velocity.normalized * -1) * declerationSpeed);
-
-            if (playerRbComponent.velocity.magnitude < 0.01f) {
+            if (playerRbComponent.velocity.magnitude < 0.05f) {
                 playerRbComponent.velocity = Vector2.zero;
+            } else {
+                playerRbComponent.AddForce((playerRbComponent.velocity.normalized * -1) * declerationSpeed);
             }
         }
 
@@ -57,7 +60,13 @@ public class PlayerController : MonoBehaviour
 
         //Possession
         if(nearestPossessable != null && !isPossessing) {
-            Debug.DrawRay(transform.position, nearestPossessable.transform.position - transform.position, Color.red);
+            Debug.DrawRay(transform.position, (nearestPossessable.transform.position - transform.position).normalized * maxDist, Color.red);
+            Debug.Log((nearestPossessable.transform.position - transform.position).magnitude);
+
+            if ((nearestPossessable.transform.position - transform.position).magnitude > maxDist) {
+                nearestPossessable.GetComponent<Possessable>().UnPulse();
+                nearestPossessable = null;
+            }
         }
 
         if(Input.GetKeyDown(KeyCode.J)) {
@@ -87,17 +96,21 @@ public class PlayerController : MonoBehaviour
             UnPossess();
             return;
         }
+        possessedObject.GetComponent<Possessable>().UnPulse();
+        possessedObject.GetComponent<SpriteRenderer>().color = possessedColor;
         SRComponent.enabled = false;
-        trail.SetActive(false);
-
+        trail.GetComponent<LineRenderer>().startWidth = 0.0f;
     }
 
     void UnPossess() {
         isPossessing = false;
         transform.position = possessedObject.transform.position;
+        possessedObject.GetComponent<Possessable>().Pulse();
+        possessedObject.GetComponent<SpriteRenderer>().color = new Color(1.0f, 1.0f, 1.0f);
         objectRbComponent = null;
         possessedObject = null;
         SRComponent.enabled = true;
-        trail.SetActive(true);
+        trail.GetComponent<Trail>().Reset();
+        trail.GetComponent<LineRenderer>().startWidth = 0.66f;
     }
 }

@@ -5,9 +5,6 @@ TextureImporter:
   - first:
       213: -375090760240012885
     second: ghost_cat_0
-  - first:
-      213: -6951257069145326967
-    second: ghost_cat_1
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -78,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -141,9 +138,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 14
+        y: 2
         width: 1748
-        height: 1683
+        height: 1668
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,27 +150,6 @@ TextureImporter:
       bones: []
       spriteID: ba1ec5dd0f86bcaf0800000000000000
       internalID: -375090760240012885
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ghost_cat_1
-      rect:
-        serializedVersion: 2
-        x: 1051
-        y: 0
-        width: 9
-        height: 10
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 98a7b23668c288f90800000000000000
-      internalID: -6951257069145326967
       vertices: []
       indices: 
       edges: []
@@ -188,7 +164,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      ghost_cat_0: -375090760240012885
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

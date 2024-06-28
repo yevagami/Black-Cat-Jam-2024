@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 06eec3ce25c71294d976b03ae4b3d0de
+guid: 8bcd3667340e1ed45bf4ad8d30caeccd
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -75,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -164,7 +164,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      box_0: 7499154508442906066
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
