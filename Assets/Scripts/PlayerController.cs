@@ -1,8 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
-{
+public class PlayerController : MonoBehaviour{
     [Header("Player")]
     [SerializeField] Rigidbody2D playerRbComponent;
     [SerializeField] float accelerationSpeed;
@@ -22,8 +21,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public bool isPossessing = false;
     [SerializeField] GameObject possessedObject;
 
-    Rigidbody2D objectRbComponent;    
-    
+    Rigidbody2D objectRbComponent;
+
+    [Header("Chaos")]
+    [SerializeField] ChaosManager chaos;
 
     // Start is called before the first frame update
     void Start()
@@ -60,8 +61,8 @@ public class PlayerController : MonoBehaviour
 
         //Possession
         if(nearestPossessable != null && !isPossessing) {
-            Debug.DrawRay(transform.position, (nearestPossessable.transform.position - transform.position).normalized * maxDist, Color.red);
-            Debug.Log((nearestPossessable.transform.position - transform.position).magnitude);
+            //Debug.DrawRay(transform.position, (nearestPossessable.transform.position - transform.position).normalized * maxDist, Color.red);
+            //Debug.Log((nearestPossessable.transform.position - transform.position).magnitude);
 
             if ((nearestPossessable.transform.position - transform.position).magnitude > maxDist) {
                 nearestPossessable.GetComponent<Possessable>().UnPulse();
@@ -80,12 +81,10 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if(!isPossessing) {
-            return;
+        if(isPossessing) {
+            objectRbComponent.AddForce(moveInput * accelerationSpeed);
+            transform.position = possessedObject.transform.position;
         }
-
-        objectRbComponent.AddForce(moveInput * accelerationSpeed);
-       
     }
 
     void PossessNearest() {
@@ -100,11 +99,11 @@ public class PlayerController : MonoBehaviour
         possessedObject.GetComponent<SpriteRenderer>().color = possessedColor;
         SRComponent.enabled = false;
         trail.GetComponent<LineRenderer>().startWidth = 0.0f;
+        chaos.AddChaos(10.0f);
     }
 
     void UnPossess() {
         isPossessing = false;
-        transform.position = possessedObject.transform.position;
         possessedObject.GetComponent<Possessable>().Pulse();
         possessedObject.GetComponent<SpriteRenderer>().color = new Color(1.0f, 1.0f, 1.0f);
         objectRbComponent = null;
