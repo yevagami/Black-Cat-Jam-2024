@@ -1,3 +1,7 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Net;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ChaosManager : MonoBehaviour
@@ -12,13 +16,16 @@ public class ChaosManager : MonoBehaviour
 
     [Header("UI")]
     public float barPercentage = 0.0f;
-    [SerializeField] UnityEngine.UI.Image chaosBar;
-    [SerializeField] UnityEngine.UI.Image chaosIcon;
-    [SerializeField] TMPro.TextMeshProUGUI PointMessage;
-    [SerializeField] TMPro.TextMeshProUGUI RankMessage;
-    [SerializeField] Sprite chaosLvl1Src;
-    [SerializeField] Sprite chaosLvl2Src;
-    [SerializeField] Sprite chaosLvl3Src;
+    public UnityEngine.UI.Image chaosBar;
+    public UnityEngine.UI.Image chaosIcon;
+    public TMPro.TextMeshProUGUI PointMessage;
+    [SerializeField] float chaosMessageDecayTime = 3.0f;
+    float chaosMessageDecayTimer = 0.0f;
+    public TMPro.TextMeshProUGUI RankMessage;
+    public Sprite chaosLvl1Src;
+    public Sprite chaosLvl2Src;
+    public Sprite chaosLvl3Src;
+    List<string> pointLogs = new List<string>();
 
     private void Start() {
         PointMessage.text = "";
@@ -33,7 +40,6 @@ public class ChaosManager : MonoBehaviour
         }
         UpdateRank();
         UpdateUI();
-        Debug.Log(chaosAmount);
     }
 
     void decay() {
@@ -95,6 +101,34 @@ public class ChaosManager : MonoBehaviour
                 chaosIcon.sprite = chaosLvl3Src;
                 RankMessage.text = "CRAZY CHAOTIC CATASTROPHE";
                 break;
+        }
+
+        writePointLogs();
+
+        if(pointLogs.Count > 0) {
+            chaosMessageDecayTimer += Time.deltaTime;
+            if (chaosMessageDecayTimer > chaosMessageDecayTime) {
+                chaosMessageDecayTimer = 0.0f;
+                pointLogs.RemoveAt(0);
+            }
+        }
+        
+    }
+
+    public void addPointMessages(string msg) {
+        if(pointLogs.Count >= 3) {
+            pointLogs.RemoveAt(0);
+        }
+        pointLogs.Add(msg);
+    }
+
+    void writePointLogs() {
+        PointMessage.text = "";
+
+        if (pointLogs.Count <= 0) { return; }
+
+        for(int i = 0; i < pointLogs.Count; i++) {
+            PointMessage.text += pointLogs[i] + "\n";
         }
     }
 }

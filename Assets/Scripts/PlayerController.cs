@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour{
 
     [Header("Chaos")]
     [SerializeField] ChaosManager chaos;
+    [SerializeField] float dismountThreshold = 5.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -96,20 +97,44 @@ public class PlayerController : MonoBehaviour{
             return;
         }
         possessedObject.GetComponent<Possessable>().UnPulse();
+        possessedObject.GetComponent<Possessable>().collisionCallback.AddListener(PossessionCollisionPoints);
         possessedObject.GetComponent<SpriteRenderer>().color = possessedColor;
         SRComponent.enabled = false;
+        
         trail.GetComponent<LineRenderer>().startWidth = 0.0f;
-        chaos.AddChaos(10.0f);
+        AddChaos(1.0f, "Possession");
     }
 
     void UnPossess() {
         isPossessing = false;
         possessedObject.GetComponent<Possessable>().Pulse();
         possessedObject.GetComponent<SpriteRenderer>().color = new Color(1.0f, 1.0f, 1.0f);
+        possessedObject.GetComponent<Possessable>().collisionCallback.RemoveAllListeners();
+        AddChaos(2.0f, "DePossession");
+        if (objectRbComponent.velocity.magnitude > dismountThreshold) {
+            AddChaos(10.0f, "Dismount");
+        }
+
         objectRbComponent = null;
         possessedObject = null;
         SRComponent.enabled = true;
+
         trail.GetComponent<Trail>().Reset();
         trail.GetComponent<LineRenderer>().startWidth = 0.66f;
+    }
+
+    public void AddChaos(float amount, string reason) {
+        chaos.AddChaos(amount);
+        chaos.addPointMessages(string.Format("+{0} {1}", (int)amount, reason));
+    }
+
+    public void PossessionCollisionPoints() {
+        if(objectRbComponent.velocity.magnitude > 3) {;
+            AddChaos(5.0f, "High Velocity Collision");
+        }
+
+        if (objectRbComponent.velocity.magnitude > 10) {
+            AddChaos(7.0f, "Railgun");
+        }
     }
 }

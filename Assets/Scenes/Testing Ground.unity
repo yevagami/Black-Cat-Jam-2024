@@ -155,7 +155,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -268, y: -245}
+  m_AnchoredPosition: {x: -266.3, y: -234.99}
   m_SizeDelta: {x: 20, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &48430424
@@ -220,7 +220,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: +10 Possession
+  m_text: '+1
+
+    +2'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -255,7 +257,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 1024
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -435,6 +437,7 @@ MonoBehaviour:
   isPossessing: 0
   possessedObject: {fileID: 0}
   chaos: {fileID: 680245495}
+  dismountThreshold: 5
 --- !u!50 &368889271
 Rigidbody2D:
   serializedVersion: 4
@@ -892,6 +895,7 @@ MonoBehaviour:
   chaosBar: {fileID: 226278566}
   chaosIcon: {fileID: 1177082358}
   PointMessage: {fileID: 48430425}
+  chaosMessageDecayTime: 3
   RankMessage: {fileID: 1780398004}
   chaosLvl1Src: {fileID: 434798456401338582, guid: f5542b9d26f633443b994292f38f52a8, type: 3}
   chaosLvl2Src: {fileID: -1690592897784697772, guid: 2a09cf04e69b9c24ea912ff6ca6bd43d, type: 3}
