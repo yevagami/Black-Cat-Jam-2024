@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour{
     [Header("Possesion")]
     public GameObject nearestPossessable;
     [SerializeField] Color possessedColor;
-    [SerializeField] float maxDist = 7.0f;
+    [SerializeField] float maxDist = 1.3f;
     [SerializeField] public bool isPossessing = false;
     [SerializeField] GameObject possessedObject;
 
@@ -30,7 +30,6 @@ public class PlayerController : MonoBehaviour{
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame

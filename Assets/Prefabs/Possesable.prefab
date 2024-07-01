@@ -175,3 +175,6 @@ MonoBehaviour:
   sr: {fileID: 5523892031648573289}
   pulse: 0
   pulseSpeed: 3
+  collisionCallback:
+    m_PersistentCalls:
+      m_Calls: []
