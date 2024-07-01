@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4633589979140164486}
   - component: {fileID: 5092291267098700279}
   m_Layer: 0
-  m_Name: Possesable
+  m_Name: Mouse Toy
   m_TagString: Possessable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: -636890511
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7499154508442906066, guid: 8bcd3667340e1ed45bf4ad8d30caeccd, type: 3}
+  m_Sprite: {fileID: -1415881090555753792, guid: a5ccf8f272a88044db2a0cf8cf7ed3df, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -148,17 +148,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -2.1736279, y: 0.1358521}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 12.34, y: 12.25}
+    oldSize: {x: 8.14, y: 3.16}
     newSize: {x: 12.34, y: 12.25}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 12, y: 12}
+  m_Size: {x: 3.9168215, y: 2.8979354}
   m_EdgeRadius: 0
 --- !u!114 &5092291267098700279
 MonoBehaviour:

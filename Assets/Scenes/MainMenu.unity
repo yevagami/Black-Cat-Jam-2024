@@ -850,7 +850,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursorTexture: {fileID: 2800000, guid: 1b71f5544abd7954f8eec35cc85e6008, type: 3}
-  playSceneName: Testing Ground
+  playSceneName: PlayScene
   cursorMode: 0
   hotSpot: {x: 0, y: 0}
 --- !u!1660057539 &9223372036854775807
