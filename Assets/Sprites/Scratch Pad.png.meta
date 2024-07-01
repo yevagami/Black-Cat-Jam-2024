@@ -164,7 +164,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Scratch Pad_0: 2282283683535169562
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

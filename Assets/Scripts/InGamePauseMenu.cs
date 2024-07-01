@@ -39,4 +39,6 @@ public class InGamePauseMenu : MonoBehaviour
         result.SetActive(true);
         resultMessage.text = string.Format("GAME OVER\n Total Points: {0}", score);
     }
+
+
 }

@@ -10,6 +10,10 @@ public class PossesionTrigger : MonoBehaviour
         if (collision.gameObject.tag == "Possessable") {
             playerController.nearestPossessable = collision.gameObject;
             playerController.nearestPossessable.GetComponent<Possessable>().Pulse();
+            playerController.maxDist = new Vector2( collision.bounds.size.x / 2, collision.bounds.size.y / 2).magnitude;
+            if(playerController.maxDist <= 1.0f) {
+                playerController.maxDist = 1.3f;
+            }
         }
     }
 

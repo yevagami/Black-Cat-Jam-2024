@@ -34,7 +34,9 @@ public class ChaosManager : MonoBehaviour
 
     private void Start() {
         PointMessage.text = "";
+        gameDurationTimer = gameDuration;
         UpdateUI();
+        Cursor.visible = true;
     }
 
     // Update is called once per frame
@@ -46,9 +48,9 @@ public class ChaosManager : MonoBehaviour
         UpdateRank();
         UpdateUI();
 
-        gameDurationTimer += Time.deltaTime;
-        if(gameDurationTimer > gameDuration) {
-            gameDurationTimer = 0.0f;
+        gameDurationTimer -= Time.deltaTime;
+        if(gameDurationTimer <= 0.0f) {
+            gameDurationTimer = gameDuration;
             menus.ResultScreen(totalChaosAmount);
         }
         Timer.text = TimeSpan.FromSeconds(gameDurationTimer).ToString(@"mm\:ss");
@@ -76,6 +78,7 @@ public class ChaosManager : MonoBehaviour
         }
 
         currentRank = (Rank)rankNum;
+        decayAmount = 2 + (rankNum / 2);
     }
 
     void UpdateUI() {

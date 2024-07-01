@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour{
     [Header("Possesion")]
     public GameObject nearestPossessable;
     [SerializeField] Color possessedColor;
-    [SerializeField] float maxDist = 1.3f;
+    public float maxDist = 1.3f;
     [SerializeField] public bool isPossessing = false;
     [SerializeField] GameObject possessedObject;
 
@@ -26,6 +26,8 @@ public class PlayerController : MonoBehaviour{
     [Header("Chaos")]
     [SerializeField] ChaosManager chaos;
     [SerializeField] float dismountThreshold = 5.0f;
+    [SerializeField] float collisionThreshold = 7.0f;
+    [SerializeField] float crashThreshold = 10.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -67,6 +69,7 @@ public class PlayerController : MonoBehaviour{
             if ((nearestPossessable.transform.position - transform.position).magnitude > maxDist) {
                 nearestPossessable.GetComponent<Possessable>().UnPulse();
                 nearestPossessable = null;
+                maxDist = 1.3f;
             }
         }
 
@@ -77,13 +80,13 @@ public class PlayerController : MonoBehaviour{
 
                if(nearestPossessable) {
                     PossessNearest();
-                }
+               }
             }
         }
 
         if(isPossessing) {
             objectRbComponent.AddForce(moveInput * accelerationSpeed);
-            transform.position = possessedObject.transform.position;
+            transform.position = new Vector3(possessedObject.transform.position.x, possessedObject.transform.position.y, -1);
         }
     }
 
@@ -128,12 +131,26 @@ public class PlayerController : MonoBehaviour{
     }
 
     public void PossessionCollisionPoints() {
-        if(objectRbComponent.velocity.magnitude > 3) {;
-            AddChaos(5.0f, "High Velocity Collision");
+        if(objectRbComponent.velocity.magnitude > collisionThreshold) {;
+            AddChaos(5.0f, "Collision 2D");
         }
 
-        if (objectRbComponent.velocity.magnitude > 10) {
-            AddChaos(7.0f, "Railgun");
+        if (objectRbComponent.velocity.magnitude > crashThreshold) {
+            AddChaos(7.0f, "Crash");
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision) {
+        if(collision.gameObject.tag == "Solid") {
+            Vector3 calculatedForce = playerRbComponent.mass * -1.0f * (playerRbComponent.velocity / Time.deltaTime);
+            playerRbComponent.AddForce(calculatedForce);
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision) {
+        if (collision.gameObject.tag == "Solid") {
+            Vector3 calculatedForce = playerRbComponent.mass * -1.0f * (playerRbComponent.velocity / Time.deltaTime);
+            playerRbComponent.AddForce(calculatedForce);
         }
     }
 }

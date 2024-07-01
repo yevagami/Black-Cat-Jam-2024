@@ -19,6 +19,9 @@ public class Trail : MonoBehaviour
     {
         points = new Vector3[numPoints];
         pointsVel = new Vector3[numPoints];
+        for(int i = 0; i < numPoints; i++) {
+            points[i] = transform.parent.position;
+        }
     }
 
     // Update is called once per frame
